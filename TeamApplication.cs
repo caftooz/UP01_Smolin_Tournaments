@@ -12,7 +12,7 @@ namespace UP01_Smolin_Tournaments
     using System;
     using System.Collections.Generic;
     
-    public partial class Application
+    public partial class TeamApplication
     {
         public int ApplicationID { get; set; }
         public int TournamentID { get; set; }

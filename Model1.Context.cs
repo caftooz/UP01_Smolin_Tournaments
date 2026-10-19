@@ -25,7 +25,7 @@ namespace UP01_Smolin_Tournaments
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Application> Applications { get; set; }
+        public virtual DbSet<TeamApplication> TeamApplications { get; set; }
         public virtual DbSet<AuditLog> AuditLogs { get; set; }
         public virtual DbSet<Discipline> Disciplines { get; set; }
         public virtual DbSet<Map> Maps { get; set; }

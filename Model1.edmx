@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище DB_Smolin_TournamentsModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище DB_Smolin_TournamentsModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Applications">
           <Key>
             <PropertyRef Name="ApplicationID" />
@@ -367,7 +367,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Applications_Tournaments">
-          <End Role="Tournaments" Type="Self.Tournaments" Multiplicity="1" />
+          <End Role="Tournaments" Type="Self.Tournaments" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tournaments">
@@ -391,7 +393,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Maps_Disciplines">
-          <End Role="Disciplines" Type="Self.Disciplines" Multiplicity="1" />
+          <End Role="Disciplines" Type="Self.Disciplines" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Maps" Type="Self.Maps" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Disciplines">
@@ -415,7 +419,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Matches_Stages">
-          <End Role="Stages" Type="Self.Stages" Multiplicity="1" />
+          <End Role="Stages" Type="Self.Stages" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Matches" Type="Self.Matches" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Stages">
@@ -487,7 +493,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MatchMaps_Matches">
-          <End Role="Matches" Type="Self.Matches" Multiplicity="1" />
+          <End Role="Matches" Type="Self.Matches" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MatchMaps" Type="Self.MatchMaps" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Matches">
@@ -499,7 +507,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Notifications_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -511,7 +521,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PlayerMatchStats_MatchMaps">
-          <End Role="MatchMaps" Type="Self.MatchMaps" Multiplicity="1" />
+          <End Role="MatchMaps" Type="Self.MatchMaps" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="PlayerMatchStats" Type="Self.PlayerMatchStats" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MatchMaps">
@@ -547,7 +559,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Prizes_Tournaments">
-          <End Role="Tournaments" Type="Self.Tournaments" Multiplicity="1" />
+          <End Role="Tournaments" Type="Self.Tournaments" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Prizes" Type="Self.Prizes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tournaments">
@@ -571,7 +585,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Stages_Tournaments">
-          <End Role="Tournaments" Type="Self.Tournaments" Multiplicity="1" />
+          <End Role="Tournaments" Type="Self.Tournaments" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Stages" Type="Self.Stages" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tournaments">
@@ -631,7 +647,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TournamentGroups_Stages">
-          <End Role="Stages" Type="Self.Stages" Multiplicity="1" />
+          <End Role="Stages" Type="Self.Stages" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="TournamentGroups" Type="Self.TournamentGroups" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Stages">
@@ -667,7 +685,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TournamentParticipants_Tournaments">
-          <End Role="Tournaments" Type="Self.Tournaments" Multiplicity="1" />
+          <End Role="Tournaments" Type="Self.Tournaments" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="TournamentParticipants" Type="Self.TournamentParticipants" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tournaments">
@@ -751,7 +771,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TournamentSponsors_Tournaments">
-          <End Role="Tournaments" Type="Self.Tournaments" Multiplicity="1" />
+          <End Role="Tournaments" Type="Self.Tournaments" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="TournamentSponsors" Type="Self.TournamentSponsors" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tournaments">
@@ -1028,12 +1050,11 @@
             <End Role="Violations" EntitySet="Violations" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DB_Smolin_TournamentsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Application">
+        <EntityType Name="TeamApplication">
           <Key>
             <PropertyRef Name="ApplicationID" />
           </Key>
@@ -1454,7 +1475,7 @@
         </EntityType>
         <Association Name="FK_Applications_ReviewedBy">
           <End Role="Users" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Applications" Type="Self.Application" Multiplicity="*" />
+          <End Role="Applications" Type="DB_Smolin_TournamentsModel.TeamApplication" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="UserID" />
@@ -1466,7 +1487,7 @@
         </Association>
         <Association Name="FK_Applications_Teams">
           <End Role="Teams" Type="Self.Team" Multiplicity="1" />
-          <End Role="Applications" Type="Self.Application" Multiplicity="*" />
+          <End Role="Applications" Type="DB_Smolin_TournamentsModel.TeamApplication" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Teams">
               <PropertyRef Name="TeamID" />
@@ -1478,7 +1499,7 @@
         </Association>
         <Association Name="FK_Applications_Tournaments">
           <End Role="Tournaments" Type="Self.Tournament" Multiplicity="1" />
-          <End Role="Applications" Type="Self.Application" Multiplicity="*" />
+          <End Role="Applications" Type="DB_Smolin_TournamentsModel.TeamApplication" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tournaments">
               <PropertyRef Name="TournamentID" />
@@ -1945,7 +1966,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DB_Smolin_TournamentsEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Applications" EntityType="Self.Application" />
+          <EntitySet Name="TeamApplications" EntityType="DB_Smolin_TournamentsModel.TeamApplication" />
           <EntitySet Name="AuditLogs" EntityType="Self.AuditLog" />
           <EntitySet Name="Disciplines" EntityType="Self.Discipline" />
           <EntitySet Name="Maps" EntityType="Self.Map" />
@@ -1975,15 +1996,15 @@
           <EntitySet Name="ViolationTypes" EntityType="Self.ViolationType" />
           <AssociationSet Name="FK_Applications_ReviewedBy" Association="Self.FK_Applications_ReviewedBy">
             <End Role="Users" EntitySet="Users" />
-            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Applications" EntitySet="TeamApplications" />
           </AssociationSet>
           <AssociationSet Name="FK_Applications_Teams" Association="Self.FK_Applications_Teams">
             <End Role="Teams" EntitySet="Teams" />
-            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Applications" EntitySet="TeamApplications" />
           </AssociationSet>
           <AssociationSet Name="FK_Applications_Tournaments" Association="Self.FK_Applications_Tournaments">
             <End Role="Tournaments" EntitySet="Tournaments" />
-            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Applications" EntitySet="TeamApplications" />
           </AssociationSet>
           <AssociationSet Name="FK_AuditLog_Users" Association="Self.FK_AuditLog_Users">
             <End Role="Users" EntitySet="Users" />
@@ -2144,8 +2165,8 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Хранилище DB_Smolin_TournamentsModelContainer" CdmEntityContainer="DB_Smolin_TournamentsEntities">
-          <EntitySetMapping Name="Applications">
-            <EntityTypeMapping TypeName="DB_Smolin_TournamentsModel.Application">
+          <EntitySetMapping Name="TeamApplications">
+            <EntityTypeMapping TypeName="DB_Smolin_TournamentsModel.TeamApplication">
               <MappingFragment StoreEntitySet="Applications">
                 <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
                 <ScalarProperty Name="TournamentID" ColumnName="TournamentID" />

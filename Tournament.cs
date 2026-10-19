@@ -17,7 +17,7 @@ namespace UP01_Smolin_Tournaments
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Tournament()
         {
-            this.Applications = new HashSet<Application>();
+            this.Applications = new HashSet<TeamApplication>();
             this.Prizes = new HashSet<Prize>();
             this.Stages = new HashSet<Stage>();
             this.TournamentParticipants = new HashSet<TournamentParticipant>();
@@ -44,7 +44,7 @@ namespace UP01_Smolin_Tournaments
         public System.DateTime CreatedAt { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Application> Applications { get; set; }
+        public virtual ICollection<TeamApplication> Applications { get; set; }
         public virtual Discipline Discipline { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Prize> Prizes { get; set; }

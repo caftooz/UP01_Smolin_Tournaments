@@ -106,6 +106,7 @@ namespace UP01_Smolin_Tournaments.Pages
                 MiddleName = nameParts.Length == 3 ? nameParts[2] : null,
                 BirthDate = new DateTime(2000, 1, 1),
                 Email = login + "@example.local",
+                RegisteredAt = DateTime.Now,
                 RoleID = roleId,
                 IsActive = true
             };

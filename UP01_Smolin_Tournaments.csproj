@@ -67,9 +67,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Application.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="AuditLog.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -164,6 +161,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Team.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TeamApplication.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="TeamMember.cs">

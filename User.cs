@@ -17,7 +17,7 @@ namespace UP01_Smolin_Tournaments
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.Applications = new HashSet<Application>();
+            this.Applications = new HashSet<TeamApplication>();
             this.AuditLogs = new HashSet<AuditLog>();
             this.Notifications = new HashSet<Notification>();
             this.Players = new HashSet<Player>();
@@ -41,7 +41,7 @@ namespace UP01_Smolin_Tournaments
         public bool IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Application> Applications { get; set; }
+        public virtual ICollection<TeamApplication> Applications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AuditLog> AuditLogs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

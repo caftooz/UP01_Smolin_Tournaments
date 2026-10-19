@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="c3f3d261619e4f9db6ca2d87c6927846" Name="Diagram1">
-        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.Application" Width="1.5" PointX="13.25" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.TeamApplication" Width="1.5" PointX="13.25" PointY="14.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.AuditLog" Width="1.5" PointX="3.75" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.Discipline" Width="1.5" PointX="0.75" PointY="16.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.Map" Width="1.5" PointX="3" PointY="17" IsExpanded="true" />

@@ -8,7 +8,40 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Регистрация">
 
-    <Grid>
-        
-    </Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="320" Margin="0,20">
+            <TextBlock Text="Регистрация" Style="{StaticResource HeaderText}"/>
+
+            <Grid>
+                <TextBox x:Name="TbLogin" MaxLength="50" ToolTip="Логин: 3–50 символов, латиница, цифры, _"
+                         Tag="{Binding ElementName=PhLogin}" TextChanged="Tb_TextChanged"
+                         PreviewTextInput="TbLogin_PreviewTextInput"/>
+                <TextBlock x:Name="PhLogin" Text="Введите логин" Style="{StaticResource Placeholder}"/>
+            </Grid>
+            <Grid>
+                <TextBox x:Name="TbFio" MaxLength="150" ToolTip="Фамилия Имя Отчество русскими буквами"
+                         Tag="{Binding ElementName=PhFio}" TextChanged="Tb_TextChanged"
+                         PreviewTextInput="TbFio_PreviewTextInput"/>
+                <TextBlock x:Name="PhFio" Text="Введите ФИО" Style="{StaticResource Placeholder}"/>
+            </Grid>
+            <Grid>
+                <PasswordBox x:Name="PbPass" MaxLength="50" ToolTip="От 6 символов, латиница, хотя бы одна цифра"
+                             Tag="{Binding ElementName=PhPass}" PasswordChanged="Pb_PasswordChanged"/>
+                <TextBlock x:Name="PhPass" Text="Введите пароль" Style="{StaticResource Placeholder}"/>
+            </Grid>
+            <Grid>
+                <PasswordBox x:Name="PbPass2" MaxLength="50" ToolTip="Повторите пароль"
+                             Tag="{Binding ElementName=PhPass2}" PasswordChanged="Pb_PasswordChanged"/>
+                <TextBlock x:Name="PhPass2" Text="Повторите пароль" Style="{StaticResource Placeholder}"/>
+            </Grid>
+
+            <TextBlock Text="Роль" Margin="5,5,5,0"/>
+            <ComboBox x:Name="CbRole" SelectedIndex="0" ToolTip="Выберите роль">
+                <ComboBoxItem Content="Игрок" Tag="Игрок"/>
+                <ComboBoxItem Content="Администратор" Tag="Администратор"/>
+            </ComboBox>
+
+            <Button Content="Создать аккаунт" ToolTip="Зарегистрироваться" Click="BtnReg_Click"/>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

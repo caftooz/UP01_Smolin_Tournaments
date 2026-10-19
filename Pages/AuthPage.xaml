@@ -8,7 +8,38 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Авторизация">
 
-    <Grid>
-        
-    </Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="320" Margin="0,20">
+        <TextBlock Text="Вход в систему" Style="{StaticResource HeaderText}"/>
+
+        <Grid>
+            <TextBox x:Name="TbLogin" MaxLength="50" ToolTip="Введите логин"
+                         Tag="{Binding ElementName=PhLogin}" TextChanged="Tb_TextChanged"/>
+            <TextBlock x:Name="PhLogin" Text="Логин" Style="{StaticResource Placeholder}"/>
+        </Grid>
+        <Grid>
+            <PasswordBox x:Name="PbPass" MaxLength="50" ToolTip="Введите пароль"
+                             Tag="{Binding ElementName=PhPass}" PasswordChanged="Pb_PasswordChanged"/>
+            <TextBlock x:Name="PhPass" Text="Пароль" Style="{StaticResource Placeholder}"/>
+        </Grid>
+
+        <StackPanel x:Name="CaptchaPanel" Visibility="Collapsed">
+            <TextBox x:Name="TbCaptcha" Height="45" IsReadOnly="True" HorizontalContentAlignment="Center"
+                         FontSize="22" FontStyle="Italic" FontWeight="Heavy"
+                         Foreground="{DynamicResource DangerBrush}"
+                         ContextMenu="{x:Null}" CommandManager.PreviewExecuted="Captcha_PreviewExecuted"
+                         ToolTip="Капча. Копирование запрещено, введите вручную"/>
+            <Grid>
+                <TextBox x:Name="TbCaptchaInput" MaxLength="6" ToolTip="Введите символы с капчи"
+                             Tag="{Binding ElementName=PhCaptcha}" TextChanged="Tb_TextChanged"/>
+                <TextBlock x:Name="PhCaptcha" Text="Введите капчу" Style="{StaticResource Placeholder}"/>
+            </Grid>
+            <Button x:Name="BtnRefresh" Content="Обновить капчу" ToolTip="Показать новую капчу" Click="BtnRefresh_Click"/>
+        </StackPanel>
+
+        <Button x:Name="BtnEnter" Content="Вход" ToolTip="Войти в систему" IsDefault="True" Click="BtnEnter_Click"/>
+        <Button Content="Регистрация" ToolTip="Создать новую учётную запись" Click="BtnReg_Click"/>
+        <Button Content="Смена пароля" ToolTip="Сменить пароль учётной записи" Click="BtnChangePass_Click"/>
+    </StackPanel>
+    </ScrollViewer>
 </Page>

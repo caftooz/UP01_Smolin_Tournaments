@@ -76,8 +76,12 @@
     <Compile Include="Discipline.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AuthService.cs" />
+    <Compile Include="Helpers\CaptchaHelper.cs" />
     <Compile Include="Helpers\Msg.cs" />
+    <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Helpers\ThemeManager.cs" />
+    <Compile Include="Helpers\Ui.cs" />
     <Compile Include="Map.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

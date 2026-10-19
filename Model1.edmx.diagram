@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c3f3d261619e4f9db6ca2d87c6927846" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.Application" Width="1.5" PointX="13.25" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.AuditLog" Width="1.5" PointX="3.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.Discipline" Width="1.5" PointX="0.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.Map" Width="1.5" PointX="3" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.Match" Width="1.5" PointX="15.5" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.MatchMap" Width="1.5" PointX="5.25" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.MatchStatus" Width="1.5" PointX="13.25" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.Notification" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.PlayerMatchStat" Width="1.5" PointX="12.5" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.Player" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.Prize" Width="1.5" PointX="10.25" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.Referee" Width="1.5" PointX="13.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.Role" Width="1.5" PointX="1.5" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.Sponsor" Width="1.5" PointX="13" PointY="26" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.Stage" Width="1.5" PointX="10.25" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.sysdiagram" Width="1.5" PointX="5.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.TeamMember" Width="1.5" PointX="5.25" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.Team" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.TournamentFormat" Width="1.5" PointX="5.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.TournamentGroup" Width="1.5" PointX="12.5" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.TournamentParticipant" Width="1.5" PointX="17.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.Tournament" Width="1.5" PointX="8" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.TournamentSponsor" Width="1.5" PointX="15.25" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.TournamentStatus" Width="1.5" PointX="5.75" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.User" Width="1.5" PointX="1.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.Venue" Width="1.5" PointX="5.75" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.Violation" Width="1.5" PointX="17.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Smolin_TournamentsModel.ViolationType" Width="1.5" PointX="15.5" PointY="9.875" IsExpanded="true" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Applications_ReviewedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Applications_Teams" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Applications_Tournaments" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_AuditLog_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Maps_Disciplines" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Teams_Disciplines" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Tournaments_Disciplines" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_MatchMaps_Maps" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Matches_Referees" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Matches_Stages" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Matches_Statuses" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Matches_Team1" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Matches_Team2" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Matches_Winner" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_MatchMaps_Matches" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Violations_Matches" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_PlayerMatchStats_MatchMaps" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Notifications_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_PlayerMatchStats_Players" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Players_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_TeamMembers_Players" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Teams_Captain" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Violations_Players" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Prizes_Tournaments" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Referees_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Violations_Referees" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Users_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_TournamentSponsors_Sponsors" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Stages_Tournaments" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_TournamentGroups_Stages" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_TeamMembers_Teams" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_TournamentParticipants_Teams" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Violations_Teams" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Tournaments_Formats" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_TournamentParticipants_Groups" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_TournamentParticipants_Tournaments" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Tournaments_Organizer" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Tournaments_Statuses" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Tournaments_Venues" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_TournamentSponsors_Tournaments" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Smolin_TournamentsModel.FK_Violations_Types" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

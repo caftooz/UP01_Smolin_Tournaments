@@ -11,7 +11,8 @@ namespace UP01_Smolin_Tournaments
     /// <summary>
     /// Логика взаимодействия для App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App : System.Windows.Application
     {
+        public static User CurrentUser { get; set; }
     }
 }

@@ -5,8 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UP01_Smolin_Tournaments"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="950" MinHeight="560" MinWidth="900"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="45"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Background="{DynamicResource PanelBrush}">
+            <Button x:Name="BtnBack" Content="Назад" ToolTip="Вернуться на предыдущую страницу" Click="BtnBack_Click"/>
+            <Button x:Name="BtnTheme" Content="Сменить тему" ToolTip="Переключить светлую / тёмную тему" Click="BtnTheme_Click"/>
+            <Button x:Name="BtnLogout" Content="Выйти" ToolTip="Выйти из учётной записи" Click="BtnLogout_Click"/>
+        </StackPanel>
         
+        <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" Navigated="MainFrame_Navigated"/>
+
+        <Grid Grid.Row="2" Background="{DynamicResource PanelBrush}">
+            <TextBlock x:Name="UserInfo" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="12,0,0,0"/>
+            <TextBlock x:Name="DateTimeNow" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,12,0"/>
+        </Grid>
+
     </Grid>
 </Window>

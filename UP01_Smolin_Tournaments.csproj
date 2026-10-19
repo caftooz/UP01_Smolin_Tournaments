@@ -77,6 +77,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Msg.cs" />
+    <Compile Include="Helpers\ThemeManager.cs" />
     <Compile Include="Map.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -194,6 +195,14 @@
     <Compile Include="ViolationType.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Page Include="CustomDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

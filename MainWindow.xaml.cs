@@ -26,6 +26,7 @@ namespace UP01_Smolin_Tournaments
     {
         public MainWindow()
         {
+            ThemeManager.Load();
             InitializeComponent();
             MainFrame.Navigate(new AuthPage());
         }
@@ -50,7 +51,7 @@ namespace UP01_Smolin_Tournaments
 
         private void BtnTheme_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Реализовать смену темы
+            ThemeManager.Toggle();
         }
 
         private void BtnLogout_Click(object sender, RoutedEventArgs e)

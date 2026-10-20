@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
+using UP01_Smolin_Tournaments.Helpers;
 
 namespace UP01_Smolin_Tournaments
 {
@@ -41,5 +38,11 @@ namespace UP01_Smolin_Tournaments
 
         private static string Initial(string s) =>
             string.IsNullOrWhiteSpace(s) ? "" : s.Trim()[0] + ".";
+
+        public void SetPassword(string password)
+        {
+            PasswordSalt = PasswordHelper.CreateSalt();
+            PasswordHash = PasswordHelper.GetHash(password, PasswordSalt);
+        }
     }
 }

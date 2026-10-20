@@ -4,7 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:UP01_Smolin_Tournaments.Pages"
-      mc:Ignorable="d"  Loaded="PassPage_Loaded"
+      xmlns:h="clr-namespace:UP01_Smolin_Tournaments.Helpers"
+      mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Смена пароля">
 
@@ -12,26 +13,13 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="320" Margin="0,20">
             <TextBlock Text="Смена пароля" Style="{StaticResource HeaderText}"/>
 
-            <Grid>
-                <TextBox x:Name="TbLogin" MaxLength="50" ToolTip="Логин учётной записи"
-                         Tag="{Binding ElementName=PhLogin}"/>
-                <TextBlock x:Name="PhLogin" Text="Логин" Style="{StaticResource Placeholder}"/>
-            </Grid>
-            <Grid>
-                <PasswordBox x:Name="PbOld" MaxLength="50" ToolTip="Пароль, которым вы входите сейчас"
-                             Tag="{Binding ElementName=PhOld}"/>
-                <TextBlock x:Name="PhOld" Text="Текущий пароль" Style="{StaticResource Placeholder}"/>
-            </Grid>
-            <Grid>
-                <PasswordBox x:Name="PbNew" MaxLength="50" ToolTip="От 6 символов, латиница, хотя бы одна цифра"
-                             Tag="{Binding ElementName=PhNew}"/>
-                <TextBlock x:Name="PhNew" Text="Новый пароль" Style="{StaticResource Placeholder}"/>
-            </Grid>
-            <Grid>
-                <PasswordBox x:Name="PbNew2" MaxLength="50" ToolTip="Введите новый пароль ещё раз"
-                             Tag="{Binding ElementName=PhNew2}"/>
-                <TextBlock x:Name="PhNew2" Text="Повторите новый пароль" Style="{StaticResource Placeholder}"/>
-            </Grid>
+            <TextBox x:Name="TbLogin" MaxLength="50" ToolTip="Логин учётной записи" h:Field.Hint="Логин" h:Field.Mask="Login"/>
+            <PasswordBox x:Name="PbOld" MaxLength="50"
+                         ToolTip="Пароль, которым вы входите сейчас" h:Field.Hint="Текущий пароль"/>
+            <PasswordBox x:Name="PbNew" MaxLength="50"
+                         ToolTip="От 8 символов, латиница, хотя бы одна цифра" h:Field.Hint="Новый пароль"/>
+            <PasswordBox x:Name="PbNew2" MaxLength="50"
+                         ToolTip="Введите новый пароль ещё раз" h:Field.Hint="Повторите новый пароль"/>
 
             <Button Content="Сохранить" ToolTip="Сохранить новый пароль" IsDefault="True" Click="BtnSave_Click"/>
         </StackPanel>

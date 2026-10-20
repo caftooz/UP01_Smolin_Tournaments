@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using UP01_Smolin_Tournaments.Helpers;
 using UP01_Smolin_Tournaments.Pages;
@@ -49,6 +39,11 @@ namespace UP01_Smolin_Tournaments
             if (MainFrame.CanGoBack) MainFrame.GoBack();
         }
 
+        private void BtnChangePass_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new ChangePassPage());
+        }
+
         private void BtnTheme_Click(object sender, RoutedEventArgs e)
         {
             ThemeManager.Toggle();
@@ -77,14 +72,15 @@ namespace UP01_Smolin_Tournaments
 
             UserInfo.Text = App.CurrentUser == null
                 ? "Гость"
-                : $"{string.Join(" ", new[] { App.CurrentUser.LastName, App.CurrentUser.FirstName, App.CurrentUser.MiddleName }.Where(x => !string.IsNullOrWhiteSpace(x)))} ({App.CurrentUser.Role.Name})";
+                : $"{App.CurrentUser.FullName} ({App.CurrentUser.Role.Name})";
 
             bool isHome = page is AuthPage || page is AdminPage
-                          || (page is UserPage && App.CurrentUser != null && App.CurrentUser.Role.Name != "Администратор");
+                          || (page is UserPage && App.CurrentUser != null && !Session.IsAdmin);
             if (isHome)
                 while (MainFrame.CanGoBack) MainFrame.RemoveBackEntry();
 
             BtnBack.Visibility = MainFrame.CanGoBack ? Visibility.Visible : Visibility.Collapsed;
+            BtnChangePass.Visibility = page is ChangePassPage ? Visibility.Collapsed : Visibility.Visible;
         }
     }
 }

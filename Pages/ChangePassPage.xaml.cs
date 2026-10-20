@@ -1,18 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
 using UP01_Smolin_Tournaments.Helpers;
 
 namespace UP01_Smolin_Tournaments.Pages
@@ -25,24 +12,18 @@ namespace UP01_Smolin_Tournaments.Pages
         public ChangePassPage()
         {
             InitializeComponent();
-            InputMask.Login(TbLogin);
             if (App.CurrentUser != null)
                 TbLogin.Text = App.CurrentUser.Login;
-        }
-        private void PassPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            Ui.UpdatePlaceholder(TbLogin, TbLogin.Text.Length > 0);
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             string login = TbLogin.Text.Trim();
 
-            if (login == "" || PbOld.Password == "" || PbNew.Password == "" || PbNew2.Password == "")
-            {
-                Msg.Error("Все поля обязательны к заполнению!");
-                return;
-            }
+            var v = new FormValidator();
+            v.Require(login != "" && PbOld.Password != "" && PbNew.Password != "" && PbNew2.Password != "",
+                      "Все поля обязательны к заполнению!");
+            if (v.ShowErrors()) return;
 
             User user = AuthService.Authenticate(login, PbOld.Password);
             if (user == null)
@@ -51,15 +32,12 @@ namespace UP01_Smolin_Tournaments.Pages
                 return;
             }
 
-            string error;
-            if (!PasswordHelper.Validate(PbNew.Password, out error)) { Msg.Error(error); return; }
-            if (PbNew.Password != PbNew2.Password) { Msg.Error("Новые пароли не совпадают!"); return; }
-            if (PbNew.Password == PbOld.Password) { Msg.Error("Новый пароль должен отличаться от текущего!"); return; }
+            v.Password(PbNew.Password, PbNew2.Password, "Новые пароли не совпадают!");
+            v.Require(PbNew.Password != PbOld.Password, "Новый пароль должен отличаться от текущего!");
+            if (v.ShowErrors()) return;
 
             User tracked = Db.Ctx.Users.Find(user.UserID);
-            string salt = PasswordHelper.CreateSalt();
-            tracked.PasswordSalt = salt;
-            tracked.PasswordHash = PasswordHelper.GetHash(PbNew.Password, salt);
+            tracked.SetPassword(PbNew.Password);
             if (!Db.TrySave()) return;
 
             Audit.Write("PASSWORD", "Users", user.UserID, user.UserID);

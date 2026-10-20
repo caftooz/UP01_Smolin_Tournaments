@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -18,6 +13,7 @@ namespace UP01_Smolin_Tournaments.Helpers
         public static void Phone(params TextBox[] boxes) => Apply(@"^[0-9+()\- ]+$", boxes);
         public static void Login(params TextBox[] boxes) => Apply(@"^[A-Za-z0-9_]+$", boxes);
         public static void Cyrillic(params TextBox[] boxes) => Apply(@"^[А-Яа-яЁё\-]+$", boxes);
+        public static void FullName(params TextBox[] boxes) => Apply(@"^[А-Яа-яЁё\s\-]+$", boxes);
 
         private static void Apply(string pattern, TextBox[] boxes)
         {

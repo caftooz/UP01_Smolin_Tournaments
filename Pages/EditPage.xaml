@@ -9,7 +9,7 @@
       Title="Запись"
       Loaded="Page_Loaded">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel Width="420" HorizontalAlignment="Center" Margin="0,10,0,20">
+        <StackPanel Width="460" HorizontalAlignment="Center" Margin="0,10,0,20">
             <TextBlock x:Name="TbHeader" Style="{StaticResource HeaderText}"/>
             <TextBlock Text="* — обязательные поля" Margin="5,0,5,8" Foreground="{DynamicResource MutedBrush}"/>
 

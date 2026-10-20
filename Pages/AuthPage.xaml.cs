@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using UP01_Smolin_Tournaments.Helpers;
 
 namespace UP01_Smolin_Tournaments.Pages
@@ -26,17 +15,6 @@ namespace UP01_Smolin_Tournaments.Pages
         public AuthPage()
         {
             InitializeComponent();
-        }
-
-        private void Tb_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var box = (TextBox)sender;
-            Ui.UpdatePlaceholder(box, box.Text.Length > 0);
-        }
-        private void Pb_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            var box = (PasswordBox)sender;
-            Ui.UpdatePlaceholder(box, box.Password.Length > 0);
         }
 
         private bool CaptchaActive => CaptchaPanel.Visibility == Visibility.Visible;
@@ -65,16 +43,13 @@ namespace UP01_Smolin_Tournaments.Pages
 
         private void BtnEnter_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(TbLogin.Text) || string.IsNullOrEmpty(PbPass.Password))
+            bool captchaOk = !CaptchaActive || TbCaptchaInput.Text == TbCaptcha.Text;
+            var v = new FormValidator();
+            v.Require(!string.IsNullOrWhiteSpace(TbLogin.Text) && PbPass.Password.Length > 0, "Введите логин и пароль!");
+            v.Require(captchaOk, "Неверно введена капча!");
+            if (v.ShowErrors())
             {
-                Msg.Error("Введите логин и пароль!");
-                return;
-            }
-
-            if (CaptchaActive && TbCaptchaInput.Text != TbCaptcha.Text)
-            {
-                Msg.Error("Неверно введена капча!");
-                RefreshCaptcha();
+                if (!captchaOk) RefreshCaptcha();
                 return;
             }
 
@@ -90,10 +65,9 @@ namespace UP01_Smolin_Tournaments.Pages
 
             App.CurrentUser = user;
             AuthService.RegisterLogin(user.UserID);
-            string fio = string.Join(" ", new[] { user.LastName, user.FirstName, user.MiddleName }.Where(x => !string.IsNullOrWhiteSpace(x)));
-            Msg.Info($"Добро пожаловать, {fio}!");
+            Msg.Info($"Добро пожаловать, {user.FullName}!");
 
-            if (user.Role.Name == "Администратор")
+            if (Session.IsAdmin)
                 NavigationService?.Navigate(new AdminPage());
             else
                 NavigationService?.Navigate(new UserPage());
@@ -101,8 +75,5 @@ namespace UP01_Smolin_Tournaments.Pages
 
         private void BtnReg_Click(object sender, RoutedEventArgs e) =>
             NavigationService?.Navigate(new RegPage());
-
-        private void BtnChangePass_Click(object sender, RoutedEventArgs e) =>
-            NavigationService?.Navigate(new ChangePassPage());
     }
 }

@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:UP01_Smolin_Tournaments.Pages"
+      xmlns:h="clr-namespace:UP01_Smolin_Tournaments.Helpers"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Таблица"
@@ -16,14 +17,8 @@
         </Grid.RowDefinitions>
 
         <WrapPanel>
-            <Grid Width="300">
-                <TextBox x:Name="TbSearch" MaxLength="100" Tag="{Binding ElementName=PhSearch}"
-                         TextChanged="TbSearch_TextChanged"/>
-                <TextBlock x:Name="PhSearch" Text="Поиск…" Style="{StaticResource Placeholder}"
-                           TextTrimming="CharacterEllipsis"/>
-            </Grid>
-            <ComboBox x:Name="CbFilter" Width="190" DisplayMemberPath="Name"
-                      SelectionChanged="CbFilter_SelectionChanged"/>
+            <TextBox x:Name="TbSearch" Width="290" MaxLength="100" h:Field.Hint="Поиск…" TextChanged="TbSearch_TextChanged"
+                     ToolTip="Поиск по текстовым полям и названиям связанных записей"/>
             <Button Content="Добавить" ToolTip="Добавить новую запись" Click="BtnAdd_Click"/>
             <Button Content="Изменить" ToolTip="Изменить выделенную запись (или двойной щелчок по строке)" Click="BtnEdit_Click"/>
             <Button Content="Удалить" ToolTip="Удалить выделенные записи (можно выделить несколько с Ctrl или Shift)" Click="BtnDelete_Click"/>

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+﻿using System.Globalization;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace UP01_Smolin_Tournaments.Helpers
 {
@@ -62,6 +58,13 @@ namespace UP01_Smolin_Tournaments.Helpers
             if (decimal.Round(value, 2) != value)
                 _errors.AppendLine($"• Поле «{field}»: не больше двух знаков после запятой.");
             return value;
+        }
+
+        public void Password(string password, string repeat, string mismatchMessage)
+        {
+            string error;
+            if (!PasswordHelper.Validate(password, out error)) _errors.AppendLine("• " + error);
+            Require(password == repeat, mismatchMessage);
         }
 
         public bool ShowErrors()

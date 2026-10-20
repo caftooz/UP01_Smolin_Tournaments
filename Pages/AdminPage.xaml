@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:UP01_Smolin_Tournaments.Pages"
+      xmlns:m="clr-namespace:UP01_Smolin_Tournaments"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Панель администратора"
@@ -17,19 +18,20 @@
 
             <TextBlock Text="Данные" FontWeight="SemiBold" Margin="5,0"/>
             <WrapPanel>
-                <Button Content="Турниры" ToolTip="Добавление, изменение и удаление турниров" Click="BtnTournaments_Click"/>
-                <Button Content="Пользователи" ToolTip="Учётные записи, роли и блокировка" Click="BtnUsers_Click"/>
-                <Button Content="Дисциплины" ToolTip="Справочник киберспортивных дисциплин" Click="BtnDisciplines_Click"/>
-                <Button Content="Форматы" ToolTip="Справочник форматов розыгрыша" Click="BtnFormats_Click"/>
-                <Button Content="Статусы" ToolTip="Справочник статусов турниров" Click="BtnStatuses_Click"/>
-                <Button Content="Площадки" ToolTip="Справочник площадок проведения" Click="BtnVenues_Click"/>
+                <Button Content="Турниры" Tag="{x:Type m:Tournament}" ToolTip="Добавление, изменение и удаление турниров" Click="Section_Click"/>
+                <Button Content="Пользователи" Tag="{x:Type m:User}" ToolTip="Учётные записи, роли и блокировка" Click="Section_Click"/>
+                <Button Content="Дисциплины" Tag="{x:Type m:Discipline}" ToolTip="Справочник киберспортивных дисциплин" Click="Section_Click"/>
+                <Button Content="Форматы" Tag="{x:Type m:TournamentFormat}" ToolTip="Справочник форматов розыгрыша" Click="Section_Click"/>
+                <Button Content="Статусы" Tag="{x:Type m:TournamentStatus}" ToolTip="Справочник статусов турниров" Click="Section_Click"/>
+                <Button Content="Площадки" Tag="{x:Type m:Venue}" ToolTip="Справочник площадок проведения" Click="Section_Click"/>
+                <Button Content="Типы нарушений" Tag="{x:Type m:ViolationType}" ToolTip="Справочник нарушений и штрафных очков" Click="Section_Click"/>
+                <Button Content="Статусы матчей" Tag="{x:Type m:MatchStatus}" ToolTip="Справочник статусов матчей" Click="Section_Click"/>
             </WrapPanel>
 
             <TextBlock Text="Просмотр и отчёты" FontWeight="SemiBold" Margin="5,12,5,0"/>
             <WrapPanel>
                 <Button Content="Каталог турниров" ToolTip="Просмотр, поиск, фильтры и сортировка — как у пользователя" Click="BtnCatalog_Click"/>
                 <Button Content="Диаграммы" ToolTip="Диаграмма и экспорт в Word, PDF, Excel" Click="BtnDiagram_Click"/>
-                <Button Content="Сменить пароль" ToolTip="Сменить пароль своей учётной записи" Click="BtnChangePass_Click"/>
             </WrapPanel>
         </StackPanel>
     </ScrollViewer>

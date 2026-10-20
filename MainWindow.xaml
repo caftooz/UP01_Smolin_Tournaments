@@ -16,11 +16,15 @@
             <RowDefinition Height="45"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal" Background="{DynamicResource PanelBrush}">
+        <DockPanel Background="{DynamicResource PanelBrush}" LastChildFill="False">
+            <Image Source="/res/logo.png" Height="37" Margin="10,4,5,4" RenderOptions.BitmapScalingMode="HighQuality"
+                   ToolTip="Платформа организации киберспортивных турниров"/>
             <Button x:Name="BtnBack" Content="Назад" ToolTip="Вернуться на предыдущую страницу" Click="BtnBack_Click"/>
             <Button x:Name="BtnTheme" Content="Сменить тему" ToolTip="Переключить светлую / тёмную тему" Click="BtnTheme_Click"/>
             <Button x:Name="BtnLogout" Content="Выйти" ToolTip="Выйти из учётной записи" Click="BtnLogout_Click"/>
-        </StackPanel>
+            <Button x:Name="BtnChangePass" DockPanel.Dock="Right" Content="Сменить пароль"
+                    ToolTip="Сменить пароль учётной записи" Click="BtnChangePass_Click"/>
+        </DockPanel>
         
         <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" Navigated="MainFrame_Navigated"/>
 

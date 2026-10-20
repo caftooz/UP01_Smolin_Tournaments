@@ -73,10 +73,15 @@
     <Compile Include="Discipline.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Audit.cs" />
     <Compile Include="Helpers\AuthService.cs" />
     <Compile Include="Helpers\CaptchaHelper.cs" />
+    <Compile Include="Helpers\Db.cs" />
+    <Compile Include="Helpers\FormValidator.cs" />
+    <Compile Include="Helpers\InputMask.cs" />
     <Compile Include="Helpers\Msg.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
+    <Compile Include="Helpers\Session.cs" />
     <Compile Include="Helpers\ThemeManager.cs" />
     <Compile Include="Helpers\Ui.cs" />
     <Compile Include="Map.cs">

@@ -16,10 +16,30 @@ namespace UP01_Smolin_Tournaments
                 _context = new DB_Smolin_TournamentsEntities();
             return _context;
         }
+
+        public static void ResetContext()
+        {
+            if (_context != null)
+            {
+                _context.Dispose();
+                _context = null;
+            }
+        }
     }
 
     public partial class Tournament
     {
         public decimal PlannedEntryRevenue => EntryFee * MaxTeams;
+        public string PlaceText => IsOnline ? "Онлайн" : (Venue != null ? Venue.Name : "—");
+    }
+    public partial class User
+    {
+        public string FullName => string.Join(" ",
+            new[] { LastName, FirstName, MiddleName }.Where(x => !string.IsNullOrWhiteSpace(x)));
+
+        public string ShortName => LastName + " " + Initial(FirstName) + Initial(MiddleName);
+
+        private static string Initial(string s) =>
+            string.IsNullOrWhiteSpace(s) ? "" : s.Trim()[0] + ".";
     }
 }

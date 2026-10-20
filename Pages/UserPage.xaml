@@ -1,14 +1,107 @@
-﻿<Page x:Class="UP01_Smolin_Tournaments.Pages.UserPage"
+<Page x:Class="UP01_Smolin_Tournaments.Pages.UserPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:UP01_Smolin_Tournaments.Pages"
       xmlns:h="clr-namespace:UP01_Smolin_Tournaments.Helpers"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Турниры"
       IsVisibleChanged="Page_IsVisibleChanged">
+
+    <Page.Resources>
+        <!-- Значки из системного шрифта Windows 10/11 -->
+        <FontFamily x:Key="Icons">Segoe MDL2 Assets</FontFamily>
+
+        <!-- Мелкая подпись -->
+        <Style x:Key="Caption" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="{DynamicResource MutedBrush}"/>
+        </Style>
+
+        <!-- Значок перед текстом -->
+        <Style x:Key="Icon" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource Icons}"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="{DynamicResource MutedBrush}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,6,0"/>
+        </Style>
+
+        <!-- Плашка-«обложка» дисциплины: свой пастельный цвет для каждой игры -->
+        <Style x:Key="DisciplineTile" TargetType="Border">
+            <Setter Property="Width" Value="64"/>
+            <Setter Property="Height" Value="64"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Background" Value="#B8C9B0"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Discipline.Name}" Value="Dota 2">
+                    <Setter Property="Background" Value="#E6B7AB"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Discipline.Name}" Value="Counter-Strike 2">
+                    <Setter Property="Background" Value="#E5CD98"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Discipline.Name}" Value="Яндекс Игры">
+                    <Setter Property="Background" Value="#CDBBE3"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Discipline.Name}" Value="Rocket League">
+                    <Setter Property="Background" Value="#AECFDF"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Цвет точки в плашке статуса -->
+        <Style x:Key="StatusDot" TargetType="Ellipse">
+            <Setter Property="Width" Value="7"/>
+            <Setter Property="Height" Value="7"/>
+            <Setter Property="Margin" Value="0,0,6,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Fill" Value="{DynamicResource AccentBrush}"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding TournamentStatus.Name}" Value="Регистрация">
+                    <Setter Property="Fill" Value="{DynamicResource SuccessBrush}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding TournamentStatus.Name}" Value="Идёт">
+                    <Setter Property="Fill" Value="{DynamicResource WarningBrush}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding TournamentStatus.Name}" Value="Завершён">
+                    <Setter Property="Fill" Value="{DynamicResource MutedBrush}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding TournamentStatus.Name}" Value="Отменён">
+                    <Setter Property="Fill" Value="{DynamicResource DangerBrush}"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Небольшая плашка (статус, «Онлайн») -->
+        <Style x:Key="Chip" TargetType="Border">
+            <Setter Property="Background" Value="{DynamicResource SurfaceAltBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="8,2"/>
+            <Setter Property="Margin" Value="0,0,6,0"/>
+        </Style>
+
+        <!-- Карточка турнира: прошедшие и отменённые турниры приглушены -->
+        <Style x:Key="TournamentCard" TargetType="Border">
+            <Setter Property="Background" Value="{DynamicResource PanelBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="14,12"/>
+            <Setter Property="Margin" Value="3"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding TournamentStatus.Name}" Value="Завершён">
+                    <Setter Property="Opacity" Value="0.7"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding TournamentStatus.Name}" Value="Отменён">
+                    <Setter Property="Opacity" Value="0.6"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -21,7 +114,7 @@
         <TextBlock x:Name="TbHello" Style="{StaticResource HeaderText}" HorizontalAlignment="Left"
                    TextWrapping="Wrap" Text="Турниры"/>
 
-        <WrapPanel Grid.Row="1">
+        <WrapPanel Grid.Row="1" Margin="0,0,0,6">
             <TextBox x:Name="TbSearch" Width="240" MaxLength="100" h:Field.Hint="Поиск…" TextChanged="TbSearch_TextChanged"
                      ToolTip="Поиск по названию турнира, дисциплине, площадке или организатору"/>
             <ComboBox x:Name="CbDiscipline" Width="180" DisplayMemberPath="Name"
@@ -42,31 +135,96 @@
             <Button Content="Сбросить" ToolTip="Очистить поиск, фильтры и сортировку" Click="BtnReset_Click"/>
         </WrapPanel>
 
+        <!-- Лента турниров: одна карточка-строка на турнир -->
         <ListView x:Name="ListTournaments" Grid.Row="2" Background="Transparent" BorderThickness="0"
-                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border Width="270" Margin="4" Padding="10" CornerRadius="6" BorderThickness="1"
-                            Background="{DynamicResource PanelBrush}" BorderBrush="{DynamicResource LineBrush}">
-                        <StackPanel>
-                            <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="Bold" TextWrapping="Wrap"/>
-                            <TextBlock Text="{Binding Discipline.Name}" FontWeight="SemiBold"
-                                       Foreground="{DynamicResource AccentBrush}"/>
-                            <TextBlock Text="{Binding TournamentFormat.Name, StringFormat='Формат: {0}'}"/>
-                            <TextBlock Text="{Binding TournamentStatus.Name, StringFormat='Статус: {0}'}"/>
-                            <TextBlock Text="{Binding StartDate, StringFormat='Старт: {0:dd.MM.yyyy HH:mm}'}"/>
-                            <TextBlock Text="{Binding PlaceText, StringFormat='Место: {0}'}" TextWrapping="Wrap"/>
-                            <TextBlock Text="{Binding MaxTeams, StringFormat='Команд: до {0}'}"/>
-                            <TextBlock Text="{Binding EntryFee, StringFormat='Взнос: {0:N0} ₽'}"/>
-                            <TextBlock Text="{Binding PrizePool, StringFormat='Призовой фонд: {0:N0} ₽'}"/>
-                            <TextBlock Text="{Binding User.FullName, StringFormat='Организатор: {0}'}"
-                                       TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}"/>
-                        </StackPanel>
+                    <Border Style="{StaticResource TournamentCard}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>   <!-- дата -->
+                                <ColumnDefinition Width="Auto"/>   <!-- дисциплина -->
+                                <ColumnDefinition Width="*"/>      <!-- название и детали -->
+                                <ColumnDefinition Width="170"/>    <!-- команды -->
+                                <ColumnDefinition Width="150"/>    <!-- призы -->
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Дата старта, как на афише -->
+                            <Border Width="64" Height="64" CornerRadius="8" VerticalAlignment="Center"
+                                    Background="{DynamicResource SurfaceAltBrush}" BorderBrush="{DynamicResource LineBrush}"
+                                    BorderThickness="1">
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding DayText}" FontSize="24" FontWeight="Bold"
+                                               HorizontalAlignment="Center" Margin="0,-2,0,-4"/>
+                                    <TextBlock Text="{Binding MonthText}" Style="{StaticResource Caption}"
+                                               FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- «Обложка» дисциплины -->
+                            <Border Grid.Column="1" Margin="10,0,14,0" VerticalAlignment="Center"
+                                    Style="{StaticResource DisciplineTile}" ToolTip="{Binding Discipline.Name}">
+                                <TextBlock Text="{Binding DisciplineShort}" FontSize="18" FontWeight="Bold"
+                                           Foreground="#2B2F36" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+
+                            <!-- Название, статус, детали -->
+                            <StackPanel Grid.Column="2" VerticalAlignment="Center" Margin="0,0,12,0">
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                                    <Border Style="{StaticResource Chip}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Ellipse Style="{StaticResource StatusDot}"/>
+                                            <TextBlock Text="{Binding TournamentStatus.Name}" FontSize="12"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <TextBlock Text="{Binding TimeText}" Style="{StaticResource Caption}"
+                                               VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                                <TextBlock Text="{Binding Name}" FontSize="17" FontWeight="Bold"
+                                           TextTrimming="CharacterEllipsis" ToolTip="{Binding Name}"/>
+
+                                <TextBlock Style="{StaticResource Caption}" FontSize="13" Margin="0,2,0,0"
+                                           TextTrimming="CharacterEllipsis">
+                                    <Run Text="{Binding Discipline.Name, Mode=OneWay}" Foreground="{DynamicResource TextBrush}"/>
+                                    <Run Text=" · "/>
+                                    <Run Text="{Binding TournamentFormat.Name, Mode=OneWay}"/>
+                                    <Run Text=" · "/>
+                                    <Run Text="{Binding TeamSizeText, Mode=OneWay}"/>
+                                </TextBlock>
+
+                                <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                                    <TextBlock Style="{StaticResource Icon}" Text="&#xE707;"/>
+                                    <TextBlock Text="{Binding PlaceText}" Style="{StaticResource Caption}"
+                                               FontSize="13" Margin="0,0,14,0"/>
+                                    <TextBlock Style="{StaticResource Icon}" Text="&#xE77B;"/>
+                                    <TextBlock Text="{Binding User.ShortName}" Style="{StaticResource Caption}"
+                                               FontSize="13" ToolTip="{Binding User.FullName}"/>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <!-- Заполненность сетки и регистрация -->
+                            <StackPanel Grid.Column="3" VerticalAlignment="Center" Margin="0,0,16,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Style="{StaticResource Icon}" Text="&#xE716;"/>
+                                    <TextBlock Text="{Binding TeamsText}" FontSize="13" FontWeight="SemiBold"/>
+                                </StackPanel>
+                                <ProgressBar Margin="0,6,0,6" Height="6" Minimum="0"
+                                             Maximum="{Binding MaxTeams, Mode=OneWay}" Value="{Binding TeamsCount, Mode=OneWay}"/>
+                                <TextBlock Text="{Binding RegistrationText}" Style="{StaticResource Caption}"
+                                           TextWrapping="Wrap"/>
+                            </StackPanel>
+
+                            <!-- Призовой фонд и взнос -->
+                            <StackPanel Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                <TextBlock Text="{Binding PrizeText}" FontSize="19" FontWeight="Bold"
+                                           HorizontalAlignment="Right"/>
+                                <TextBlock Text="призовой фонд" Style="{StaticResource Caption}" HorizontalAlignment="Right"/>
+                                <TextBlock Text="{Binding FeeText}" FontSize="13" Margin="0,6,0,0"
+                                           HorizontalAlignment="Right" Foreground="{DynamicResource AccentBrush}"/>
+                            </StackPanel>
+                        </Grid>
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>

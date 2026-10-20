@@ -49,9 +49,7 @@ namespace UP01_Smolin_Tournaments.Pages
 
             if (CbSort.SelectedIndex < 0) CbSort.SelectedIndex = 0;
 
-            TbHello.Text = App.CurrentUser != null
-                ? "Турниры — добро пожаловать, " + App.CurrentUser.FirstName + "!"
-                : "Турниры";
+            TbHello.Text = App.CurrentUser != null ? "Турниры — добро пожаловать, " + App.CurrentUser.FirstName + "!" : "Турниры";
 
             _ready = true;
             UpdateList();

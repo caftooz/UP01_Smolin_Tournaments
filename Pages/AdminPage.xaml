@@ -16,7 +16,7 @@
             <TextBlock x:Name="TbStats" HorizontalAlignment="Center" Margin="0,0,0,16"
                        Foreground="{DynamicResource MutedBrush}" TextWrapping="Wrap"/>
 
-            <TextBlock Text="Данные" FontWeight="SemiBold" Margin="5,0"/>
+            <TextBlock Text="Просмотр и редактирование таблиц" FontWeight="SemiBold" Margin="5,0"/>
             <WrapPanel>
                 <Button Content="Турниры" Tag="{x:Type m:Tournament}" ToolTip="Добавление, изменение и удаление турниров" Click="Section_Click"/>
                 <Button Content="Пользователи" Tag="{x:Type m:User}" ToolTip="Учётные записи, роли и блокировка" Click="Section_Click"/>
@@ -28,7 +28,7 @@
                 <Button Content="Статусы матчей" Tag="{x:Type m:MatchStatus}" ToolTip="Справочник статусов матчей" Click="Section_Click"/>
             </WrapPanel>
 
-            <TextBlock Text="Просмотр и отчёты" FontWeight="SemiBold" Margin="5,12,5,0"/>
+            <TextBlock Text="Турниры и диаграммы" FontWeight="SemiBold" Margin="5,12,5,0"/>
             <WrapPanel>
                 <Button Content="Каталог турниров" ToolTip="Просмотр, поиск, фильтры и сортировка — как у пользователя" Click="BtnCatalog_Click"/>
                 <Button Content="Диаграммы" ToolTip="Диаграмма и экспорт в Word, PDF, Excel" Click="BtnDiagram_Click"/>

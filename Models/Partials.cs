@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Globalization;
+using System.Linq;
 using UP01_Smolin_Tournaments.Helpers;
 
 namespace UP01_Smolin_Tournaments
@@ -26,9 +28,53 @@ namespace UP01_Smolin_Tournaments
 
     public partial class Tournament
     {
+        private static readonly CultureInfo Ru = new CultureInfo("ru-RU");
+
         public decimal PlannedEntryRevenue => EntryFee * MaxTeams;
         public string PlaceText => IsOnline ? "Онлайн" : (Venue != null ? Venue.Name : "—");
+
+        public string DayText => StartDate.Day.ToString();
+        public string MonthText => StartDate.ToString("MMM", Ru).TrimEnd('.').ToUpper(Ru);
+        public string TimeText => StartDate.ToString("dddd, HH:mm", Ru);
+
+        /// <summary>Короткое обозначение игры для плашки: Counter-Strike 2 → CS2, Rocket League → RL.</summary>
+        public string DisciplineShort
+        {
+            get
+            {
+                string name = Discipline != null ? Discipline.Name : "";
+                string letters = new string(name
+                    .Split(new[] { ' ', '-' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Where(w => char.IsLetter(w[0]))
+                    .Select(w => char.ToUpper(w[0]))
+                    .ToArray());
+                string digits = new string(name.Where(char.IsDigit).ToArray());
+                string result = letters + digits;
+                if (result.Length == 0) return "?";
+                return result.Length > 3 ? result.Substring(0, 3) : result;
+            }
+        }
+
+        public string TeamSizeText => Discipline == null ? "" : Discipline.TeamSize + " на " + Discipline.TeamSize;
+
+        public int TeamsCount => TournamentParticipants != null ? TournamentParticipants.Count : 0;
+        public string TeamsText => TeamsCount + " / " + MaxTeams + " команд";
+
+        public string PrizeText => PrizePool > 0 ? PrizePool.ToString("N0", Ru) + " ₽" : "—";
+        public string FeeText => EntryFee > 0 ? "Взнос " + EntryFee.ToString("N0", Ru) + " ₽" : "Бесплатное участие";
+
+        public string RegistrationText
+        {
+            get
+            {
+                DateTime now = DateTime.Now;
+                if (now < RegistrationStart) return "Регистрация с " + RegistrationStart.ToString("d MMMM", Ru);
+                if (now <= RegistrationEnd) return "Регистрация до " + RegistrationEnd.ToString("d MMMM, HH:mm", Ru);
+                return "Регистрация закрыта";
+            }
+        }
     }
+
     public partial class User
     {
         public string FullName => string.Join(" ",

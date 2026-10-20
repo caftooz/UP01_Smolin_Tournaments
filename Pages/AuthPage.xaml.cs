@@ -89,6 +89,7 @@ namespace UP01_Smolin_Tournaments.Pages
             }
 
             App.CurrentUser = user;
+            AuthService.RegisterLogin(user.UserID);
             string fio = string.Join(" ", new[] { user.LastName, user.FirstName, user.MiddleName }.Where(x => !string.IsNullOrWhiteSpace(x)));
             Msg.Info($"Добро пожаловать, {fio}!");
 

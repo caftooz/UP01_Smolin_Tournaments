@@ -18,5 +18,14 @@ namespace UP01_Smolin_Tournaments.Helpers
             string hash = PasswordHelper.GetHash(password, user.PasswordSalt);
             return hash == user.PasswordHash ? user : null;
         }
+
+        public static void RegisterLogin(int userId)
+        {
+            User tracked = DB_Smolin_TournamentsEntities.GetContext().Users.Find(userId);
+            if (tracked == null) return;
+            tracked.LastLoginAt = DateTime.Now;
+            Db.TrySave();
+            Audit.Write("LOGIN", "Users", userId, userId);
+        }
     }
 }

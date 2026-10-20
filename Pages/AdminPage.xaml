@@ -6,9 +6,31 @@
       xmlns:local="clr-namespace:UP01_Smolin_Tournaments.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Панель администратора">
+      Title="Панель администратора"
+      IsVisibleChanged="Page_IsVisibleChanged">
+    
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel HorizontalAlignment="Center" Margin="0,20" MaxWidth="720">
+            <TextBlock x:Name="TbHello" Style="{StaticResource HeaderText}" TextWrapping="Wrap"/>
+            <TextBlock x:Name="TbStats" HorizontalAlignment="Center" Margin="0,0,0,16"
+                       Foreground="{DynamicResource MutedBrush}" TextWrapping="Wrap"/>
 
-    <Grid>
-        
-    </Grid>
+            <TextBlock Text="Данные" FontWeight="SemiBold" Margin="5,0"/>
+            <WrapPanel>
+                <Button Content="Турниры" ToolTip="Добавление, изменение и удаление турниров" Click="BtnTournaments_Click"/>
+                <Button Content="Пользователи" ToolTip="Учётные записи, роли и блокировка" Click="BtnUsers_Click"/>
+                <Button Content="Дисциплины" ToolTip="Справочник киберспортивных дисциплин" Click="BtnDisciplines_Click"/>
+                <Button Content="Форматы" ToolTip="Справочник форматов розыгрыша" Click="BtnFormats_Click"/>
+                <Button Content="Статусы" ToolTip="Справочник статусов турниров" Click="BtnStatuses_Click"/>
+                <Button Content="Площадки" ToolTip="Справочник площадок проведения" Click="BtnVenues_Click"/>
+            </WrapPanel>
+
+            <TextBlock Text="Просмотр и отчёты" FontWeight="SemiBold" Margin="5,12,5,0"/>
+            <WrapPanel>
+                <Button Content="Каталог турниров" ToolTip="Просмотр, поиск, фильтры и сортировка — как у пользователя" Click="BtnCatalog_Click"/>
+                <Button Content="Диаграммы" ToolTip="Диаграмма и экспорт в Word, PDF, Excel" Click="BtnDiagram_Click"/>
+                <Button Content="Сменить пароль" ToolTip="Сменить пароль своей учётной записи" Click="BtnChangePass_Click"/>
+            </WrapPanel>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

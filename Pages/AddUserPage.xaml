@@ -6,9 +6,81 @@
       xmlns:local="clr-namespace:UP01_Smolin_Tournaments.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Добавление пользователей">
+      Title="Пользователь"
+      Loaded="Page_Loaded">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Width="420" HorizontalAlignment="Center" Margin="0,10,0,20">
+            <TextBlock x:Name="TbHeader" Style="{StaticResource HeaderText}"/>
+            <TextBlock Text="* — обязательные поля" Margin="5,0,5,8" Foreground="{DynamicResource MutedBrush}"/>
 
-    <Grid>
-        
-    </Grid>
+            <TextBlock Text="Логин * (латиница, цифры, _)" Margin="5,8,5,0"/>
+            <Grid>
+                <TextBox x:Name="TbLogin" MaxLength="50" ToolTip="От 3 до 50 символов, уникальный"
+                         Tag="{Binding ElementName=PhLogin}"/>
+                <TextBlock x:Name="PhLogin" Text="Например: org_sidorov" Style="{StaticResource Placeholder}"/>
+            </Grid>
+
+            <TextBlock Text="Фамилия *" Margin="5,8,5,0"/>
+            <Grid>
+                <TextBox x:Name="TbLastName" MaxLength="50" ToolTip="Русские буквы, допускается дефис"
+                         Tag="{Binding ElementName=PhLastName}"/>
+                <TextBlock x:Name="PhLastName" Text="Сидоров" Style="{StaticResource Placeholder}"/>
+            </Grid>
+
+            <TextBlock Text="Имя *" Margin="5,8,5,0"/>
+            <Grid>
+                <TextBox x:Name="TbFirstName" MaxLength="50" ToolTip="Русские буквы, допускается дефис"
+                         Tag="{Binding ElementName=PhFirstName}"/>
+                <TextBlock x:Name="PhFirstName" Text="Олег" Style="{StaticResource Placeholder}"/>
+            </Grid>
+
+            <TextBlock Text="Отчество" Margin="5,8,5,0"/>
+            <Grid>
+                <TextBox x:Name="TbMiddleName" MaxLength="50" ToolTip="Необязательно"
+                         Tag="{Binding ElementName=PhMiddleName}"/>
+                <TextBlock x:Name="PhMiddleName" Text="Игоревич" Style="{StaticResource Placeholder}"/>
+            </Grid>
+
+            <TextBlock Text="Дата рождения * (возраст от 10 до 100 лет)" Margin="5,8,5,0"/>
+            <DatePicker x:Name="DpBirth" ToolTip="Нужна для контроля возрастных ограничений дисциплин"/>
+
+            <TextBlock Text="E-mail * (уникальный)" Margin="5,8,5,0"/>
+            <Grid>
+                <TextBox x:Name="TbEmail" MaxLength="100" ToolTip="Адрес электронной почты, например name@mail.ru"
+                         Tag="{Binding ElementName=PhEmail}"/>
+                <TextBlock x:Name="PhEmail" Text="name@mail.ru" Style="{StaticResource Placeholder}"/>
+            </Grid>
+
+            <TextBlock Text="Телефон" Margin="5,8,5,0"/>
+            <Grid>
+                <TextBox x:Name="TbPhone" MaxLength="18" ToolTip="Формат: +7 (900) 123-45-67"
+                         Tag="{Binding ElementName=PhPhone}"/>
+                <TextBlock x:Name="PhPhone" Text="+7 (900) 123-45-67" Style="{StaticResource Placeholder}"/>
+            </Grid>
+
+            <TextBlock Text="Роль *" Margin="5,8,5,0"/>
+            <ComboBox x:Name="CbRole" DisplayMemberPath="Name" SelectedValuePath="RoleID"
+                      ToolTip="Роль определяет доступные функции"/>
+
+            <CheckBox x:Name="ChkActive" Content="Активен (может входить в систему)" Margin="5,10,5,0" IsChecked="True"
+                      ToolTip="Снимите флажок, чтобы заблокировать вход без удаления истории"/>
+
+            <TextBlock x:Name="TbPassLabel" Text="Пароль *" Margin="5,12,5,0"/>
+            <Grid>
+                <PasswordBox x:Name="PbPass" MaxLength="50" ToolTip="От 6 символов, латиница, хотя бы одна цифра"
+                             Tag="{Binding ElementName=PhPass}"/>
+                <TextBlock x:Name="PhPass" Text="Пароль" Style="{StaticResource Placeholder}"/>
+            </Grid>
+            <Grid>
+                <PasswordBox x:Name="PbPass2" MaxLength="50" ToolTip="Повторите пароль"
+                             Tag="{Binding ElementName=PhPass2}"/>
+                <TextBlock x:Name="PhPass2" Text="Повторите пароль" Style="{StaticResource Placeholder}"/>
+            </Grid>
+
+            <WrapPanel HorizontalAlignment="Center" Margin="0,12,0,0">
+                <Button Content="Сохранить" ToolTip="Проверить данные и сохранить" IsDefault="True" Click="BtnSave_Click"/>
+                <Button Content="Отмена" ToolTip="Вернуться без сохранения" Click="BtnCancel_Click"/>
+            </WrapPanel>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

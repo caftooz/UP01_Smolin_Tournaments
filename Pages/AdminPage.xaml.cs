@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UP01_Smolin_Tournaments.Helpers;
+using UP01_Smolin_Tournaments.Helpers.Crud;
 
 namespace UP01_Smolin_Tournaments.Pages
 {

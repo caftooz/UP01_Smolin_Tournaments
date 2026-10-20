@@ -13,21 +13,32 @@ namespace UP01_Smolin_Tournaments.Helpers
     {
         public static void UpdatePlaceholder(Control box, bool hasText)
         {
-            if (box.Tag is UIElement placeholder)
+            UIElement placeholder = FindPlaceholder(box);
+            if (placeholder != null)
                 placeholder.Visibility = hasText ? Visibility.Hidden : Visibility.Visible;
+        }
+
+        private static UIElement FindPlaceholder(Control box)
+        {
+            if (box.Tag is UIElement fromTag)
+                return fromTag;
+
+            var panel = box.Parent as Panel;
+            if (panel == null) return null;
+            return panel.Children.OfType<TextBlock>().FirstOrDefault(tb => !tb.IsHitTestVisible);
         }
 
         public static void RegisterPlaceholders()
         {
             EventManager.RegisterClassHandler(typeof(TextBox), TextBox.TextChangedEvent,
-                new TextChangedEventHandler((s, e) => Refresh((TextBox)s)));
+                new TextChangedEventHandler((s, e) => Refresh((Control)s)));
             EventManager.RegisterClassHandler(typeof(PasswordBox), PasswordBox.PasswordChangedEvent,
-                new RoutedEventHandler((s, e) => Refresh((PasswordBox)s)));
+                new RoutedEventHandler((s, e) => Refresh((Control)s)));
 
             EventManager.RegisterClassHandler(typeof(TextBox), FrameworkElement.LoadedEvent,
-                new RoutedEventHandler((s, e) => RefreshLater((Control)s)));
+                new RoutedEventHandler((s, e) => Refresh((Control)s)));
             EventManager.RegisterClassHandler(typeof(PasswordBox), FrameworkElement.LoadedEvent,
-                new RoutedEventHandler((s, e) => RefreshLater((Control)s)));
+                new RoutedEventHandler((s, e) => Refresh((Control)s)));
         }
 
         private static void Refresh(Control box)
@@ -37,8 +48,5 @@ namespace UP01_Smolin_Tournaments.Helpers
             bool hasText = text != null ? text.Text.Length > 0 : pass != null && pass.Password.Length > 0;
             UpdatePlaceholder(box, hasText);
         }
-
-        private static void RefreshLater(Control box) =>
-            box.Dispatcher.BeginInvoke(DispatcherPriority.ContextIdle, new System.Action(() => Refresh(box)));
     }
 }

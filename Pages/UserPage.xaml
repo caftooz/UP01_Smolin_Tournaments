@@ -6,9 +6,79 @@
       xmlns:local="clr-namespace:UP01_Smolin_Tournaments.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Турниры">
+      Title="Турниры"
+      IsVisibleChanged="Page_IsVisibleChanged">
 
-    <Grid>
-        
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel>
+            <Button DockPanel.Dock="Right" Content="Сменить пароль" ToolTip="Сменить пароль своей учётной записи"
+                    Click="BtnChangePass_Click"/>
+            <TextBlock x:Name="TbHello" Style="{StaticResource HeaderText}" HorizontalAlignment="Left"
+                       TextWrapping="Wrap" Text="Турниры"/>
+        </DockPanel>
+
+        <WrapPanel Grid.Row="1">
+            <Grid Width="250">
+                <TextBox x:Name="TbSearch" MaxLength="100"
+                         ToolTip="Поиск по названию турнира, дисциплине, площадке или организатору"
+                         Tag="{Binding ElementName=PhSearch}" TextChanged="TbSearch_TextChanged"/>
+                <TextBlock x:Name="PhSearch" Text="Поиск…" Style="{StaticResource Placeholder}"/>
+            </Grid>
+            <ComboBox x:Name="CbDiscipline" Width="180" DisplayMemberPath="Name"
+                      ToolTip="Фильтр по дисциплине" SelectionChanged="Filter_SelectionChanged"/>
+            <ComboBox x:Name="CbStatus" Width="160" DisplayMemberPath="Name"
+                      ToolTip="Фильтр по статусу турнира" SelectionChanged="Filter_SelectionChanged"/>
+            <ComboBox x:Name="CbSort" Width="230" ToolTip="Порядок сортировки"
+                      SelectionChanged="Filter_SelectionChanged">
+                <ComboBoxItem Content="Дата: сначала ранние"/>
+                <ComboBoxItem Content="Дата: сначала поздние"/>
+                <ComboBoxItem Content="Взнос: по возрастанию"/>
+                <ComboBoxItem Content="Взнос: по убыванию"/>
+                <ComboBoxItem Content="Призовой фонд: по убыванию"/>
+                <ComboBoxItem Content="Название: А–Я"/>
+            </ComboBox>
+            <CheckBox x:Name="ChkOnline" Content="Только онлайн" ToolTip="Показать только онлайн-турниры"
+                      Checked="ChkOnline_Changed" Unchecked="ChkOnline_Changed"/>
+            <Button Content="Сбросить" ToolTip="Очистить поиск, фильтры и сортировку" Click="BtnReset_Click"/>
+        </WrapPanel>
+
+        <ListView x:Name="ListTournaments" Grid.Row="2" Background="Transparent" BorderThickness="0"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border Width="270" Margin="4" Padding="10" CornerRadius="6" BorderThickness="1"
+                            Background="{DynamicResource PanelBrush}" BorderBrush="{DynamicResource LineBrush}">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="Bold" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding Discipline.Name}" FontWeight="SemiBold"
+                                       Foreground="{DynamicResource AccentBrush}"/>
+                            <TextBlock Text="{Binding TournamentFormat.Name, StringFormat='Формат: {0}'}"/>
+                            <TextBlock Text="{Binding TournamentStatus.Name, StringFormat='Статус: {0}'}"/>
+                            <TextBlock Text="{Binding StartDate, StringFormat='Старт: {0:dd.MM.yyyy HH:mm}'}"/>
+                            <TextBlock Text="{Binding PlaceText, StringFormat='Место: {0}'}" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding MaxTeams, StringFormat='Команд: до {0}'}"/>
+                            <TextBlock Text="{Binding EntryFee, StringFormat='Взнос: {0:N0} ₽'}"/>
+                            <TextBlock Text="{Binding PrizePool, StringFormat='Призовой фонд: {0:N0} ₽'}"/>
+                            <TextBlock Text="{Binding User.FullName, StringFormat='Организатор: {0}'}"
+                                       TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <TextBlock x:Name="TbCount" Grid.Row="3" Margin="5" Foreground="{DynamicResource MutedBrush}"/>
     </Grid>
 </Page>

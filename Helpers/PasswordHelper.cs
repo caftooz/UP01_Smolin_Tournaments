@@ -20,7 +20,7 @@ namespace UP01_Smolin_Tournaments.Helpers
         {
             using (var sha = SHA256.Create())
             {
-                byte[] bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(password + salt));
+                byte[] bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(salt + password));
                 return string.Concat(bytes.Select(b => b.ToString("X2")));
             }
         }

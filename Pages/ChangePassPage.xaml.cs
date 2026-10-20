@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using UP01_Smolin_Tournaments.Helpers;
 
 namespace UP01_Smolin_Tournaments.Pages
@@ -27,6 +28,10 @@ namespace UP01_Smolin_Tournaments.Pages
             InputMask.Login(TbLogin);
             if (App.CurrentUser != null)
                 TbLogin.Text = App.CurrentUser.Login;
+        }
+        private void PassPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            Ui.UpdatePlaceholder(TbLogin, TbLogin.Text.Length > 0);
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)

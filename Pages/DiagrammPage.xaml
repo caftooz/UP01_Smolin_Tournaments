@@ -4,11 +4,63 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:UP01_Smolin_Tournaments.Pages"
+      xmlns:charts="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Диаграмма">
+      Title="Диаграммы и отчёты"
+      Loaded="Page_Loaded">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-    <Grid>
+        <WrapPanel>
+            <StackPanel>
+                <TextBlock Text="Организатор" Margin="5,0"/>
+                <ComboBox x:Name="CbOrganizer" Width="240" DisplayMemberPath="FullName"
+                          ToolTip="Чьи турниры учитывать" SelectionChanged="UpdateChart"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Группировать по" Margin="5,0"/>
+                <ComboBox x:Name="CbGroup" Width="170" ToolTip="Что откладывается по горизонтальной оси"
+                          SelectionChanged="UpdateChart">
+                    <ComboBoxItem Content="дисциплинам"/>
+                    <ComboBoxItem Content="статусам"/>
+                    <ComboBoxItem Content="форматам"/>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Показатель" Margin="5,0"/>
+                <ComboBox x:Name="CbMetric" Width="240" ToolTip="Что откладывается по вертикальной оси"
+                          SelectionChanged="UpdateChart">
+                    <ComboBoxItem Content="Плановый сбор взносов, ₽"/>
+                    <ComboBoxItem Content="Количество турниров"/>
+                    <ComboBoxItem Content="Призовой фонд, ₽"/>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Тип диаграммы" Margin="5,0"/>
+                <ComboBox x:Name="CbChartType" Width="170" ToolTip="Вид диаграммы"
+                          SelectionChanged="UpdateChart"/>
+            </StackPanel>
+        </WrapPanel>
         
+        <WrapPanel Grid.Row="1" Margin="0,6,0,0">
+            <Button Content="Экспорт в Excel" ToolTip="Выгрузить турниры по организаторам в книгу .xlsx" Click="BtnExcel_Click"/>
+            <Button Content="Экспорт в Word" ToolTip="Сформировать отчёт .docx и его копию .pdf" Click="BtnWord_Click"/>
+        </WrapPanel>
+
+        <TextBlock x:Name="TbChartTitle" Grid.Row="2" Margin="5,8" FontSize="16" FontWeight="SemiBold" TextWrapping="Wrap"/>
+
+        <WindowsFormsHost Grid.Row="3" Margin="5">
+            <charts:Chart x:Name="ChartMain">
+                <charts:Chart.Legends>
+                    <charts:Legend/>
+                </charts:Chart.Legends>
+            </charts:Chart>
+        </WindowsFormsHost>
     </Grid>
 </Page>
